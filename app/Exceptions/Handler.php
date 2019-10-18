@@ -18,7 +18,7 @@ class Handler extends ExceptionHandler
             return redirect()->guest('/login/admin');
         }
         
-        return redirect()->guest(route('login'));
+        return redirect()->guest(route('/email/verify'));
     }
     /**
      * A list of the exception types that are not reported.

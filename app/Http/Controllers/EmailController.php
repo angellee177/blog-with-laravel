@@ -10,10 +10,10 @@ class EmailController extends Controller
 {
     public function sendEmail()
     {
-        $details = [
-            'title' => 'Title: Mail from Real Programmer',
-            'body' => 'Body: This is for testing email using smtp'
-        ];
+      $details = [
+          'title' => 'Title: Mail from Real Programmer',
+          'body' => 'Body: This is for testing email using smtp'
+      ];
  
         \Mail::send('emails.email', $details, function($message) {
  
