@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Article;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -14,13 +16,13 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');   
+        $this->middleware('auth');  
+        // $this->articles = $articles; 
     }
 
     public function index()
     {
         $articles  =Article::latest()->paginate(5);
-
         return view('articles.index', compact('articles'))
             ->with('i', (request()->input('page', 1)- 1) * 5);
     }
@@ -47,6 +49,10 @@ class ArticleController extends Controller
                     'title' => 'required',
                     'description' => 'required',
                 ]);
+        $request->user()->articles()->create([
+            'title'=>$request->title,
+            'description'=>$request->description,
+        ]);
         Article::create($request->all());
 
         return redirect()->route('articles.index')
@@ -85,9 +91,11 @@ class ArticleController extends Controller
      */
     public function update(Request $request,Article $article)
     {
+
         $request->validate([
             'title'=>'required',
             'description'=>'required',
+            'user_id' => Auth::user()->id
         ]);
 
         $article->update($request->all());

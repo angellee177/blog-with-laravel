@@ -17,10 +17,11 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title', 50);
             $table->text('description');
-            $table->enum('status', ['0', '1', '2'])->default($value='0');
-            $table->integer('user_id')->unsigned();
+            $table->enum('status', ['Rejected', 'Pending', 'Approved'])->default($value='Pending');
             $table->timestamps();
+            $table->integer('user_id');
         });
+
     }
 
     /**

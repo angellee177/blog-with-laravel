@@ -8,10 +8,11 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    Hi boss!
+                        Hello
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

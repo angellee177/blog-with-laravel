@@ -25,5 +25,5 @@ Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
 Route::view('/home', 'home')->middleware('auth');
 Route::view('/admin', 'admin');
-Route::resource('articles', 'ArticleController')->middleware('auth');
+Route::resource('articles', 'ArticleController');
 

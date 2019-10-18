@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http;
+namespace App\Http\Controller;
+
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,6 +14,8 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    
+
     protected $middleware = [
         \App\Http\Middleware\TrustProxies::class,
         \App\Http\Middleware\CheckForMaintenanceMode::class,

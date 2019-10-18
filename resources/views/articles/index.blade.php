@@ -7,7 +7,19 @@
                 <h2>Blog with Laravel</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('articles.create') }}"> Create New Article</a>
+                @if (Route::has('login'))
+                    <div class="top-right links">
+                        @auth
+                        <a class="btn btn-success" href="{{ route('articles.create') }}"> Create New Article</a>
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
+            
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -23,6 +35,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>Status</th>
+            <th>Author</th>
             <th>Created At</th>
             <th>Updated At</th>
             <th width="280px">Action</th>
