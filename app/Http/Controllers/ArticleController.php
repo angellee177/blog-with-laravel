@@ -17,7 +17,7 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');  
-        // $this->articles = $articles; 
+
     }
 
     public function index()
@@ -45,15 +45,11 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-                    'title' => 'required',
-                    'description' => 'required',
-                ]);
-        $request->user()->articles()->create([
-            'title'=>$request->title,
-            'description'=>$request->description,
-        ]);
-        Article::create($request->all());
+        $article = new Article();
+        $article->title = $request->title;
+        $article->description = $request->description;
+        $article->user_id = Auth::id();
+        $article->save();
 
         return redirect()->route('articles.index')
                         ->with('success', 'articles created successfully');
@@ -95,7 +91,6 @@ class ArticleController extends Controller
         $request->validate([
             'title'=>'required',
             'description'=>'required',
-            'user_id' => Auth::user()->id
         ]);
 
         $article->update($request->all());

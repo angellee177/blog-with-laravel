@@ -16,7 +16,12 @@ class article extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
-    }   
+    }
+
+    public function getArticleUser()
+    {
+        return Auth::user()->id;
+    }
 }
 
 $user_id = Auth::user()->id;
