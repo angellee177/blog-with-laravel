@@ -9,8 +9,22 @@
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css">
 </head>
 <body>
+    @extends('layouts.auth')
+
+    @section('content')
     <div class='container'>
-        @yield('content')
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Dashboard</div>
+                        <div class="card-body">
+                                    {{ Auth::user()->name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    @endsection
 </body>
 </html>

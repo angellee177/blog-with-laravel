@@ -25,4 +25,3 @@ class article extends Model
 }
 
 $user_id = Auth::user()->id;
-echo(Auth::user());

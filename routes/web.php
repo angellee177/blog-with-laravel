@@ -16,12 +16,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Auth::routes(['verify' => true]); 
 
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
 
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
+
+Route::get('/laravel-send-email', 'EmailController@sendEmail');
 
 Route::view('/home', 'home')->middleware('auth');
 Route::view('/admin', 'admin');
