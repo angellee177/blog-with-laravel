@@ -24,9 +24,9 @@ Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
-Route::get('/laravel-send-email', 'EmailController@sendEmail');
+Route::get('send-mail', 'MailSend@mailsend');
 
-Route::view('/home', 'home')->middleware('auth');
+Route::view('/home', 'home')->middleware('verified');
 Route::view('/admin', 'admin');
 Route::resource('articles', 'ArticleController');
 
