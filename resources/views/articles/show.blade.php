@@ -1,34 +1,33 @@
 @extends('articles.layout')
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2> Show Product</h2>
-            </div>
+<div class="container">
+        <div class="well col-md-8 col-md-offset-2 " >
+            <h4 class="center description" style="text-align:center">
+                <strong>
+                        {{ $article->title }}
+                </strong>
+            </h4>
+            <hr/>
+                    {{ $article->description}}
+            <hr/>
+                <p>Status: {{$article->status}}</p>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('articles.index') }}"> Back</a>
+                <p class="center">
+                    <em>Created By:</em>
+                </p>
+                <p class="center">
+                    <small>
+                        {{ $article->user->name }}
+                    </small>
+                    <div class="pull-right">
+                    <div class="pull-right"><small>Created:{{ $article->created_at }}</small>
+                    </div>
+                </p>
             </div>
         </div>
-    </div>
-   
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Title:</strong>
-                {{ $article->title }}
-            </div>
+        <div class="recipe-actions">
+            <a class="btn btn-primary" href="{{ route('articles.index') }}"> Back</a>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Description:</strong>
-                {{ $article->description}}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Author:</strong>
-                {{ $article->user_id}}
-            </div>
-        </div>
+        
     </div>
 @endsection

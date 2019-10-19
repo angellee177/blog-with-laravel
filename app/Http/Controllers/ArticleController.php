@@ -107,7 +107,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {   
-        $this->authorize('delete', $article);
         $article->delete();
         return redirect()->route('articles.index')
                         ->with('success', 'Article deleted successfully');

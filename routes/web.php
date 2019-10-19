@@ -30,5 +30,7 @@ Route::get('send-mail', 'MailSend@mailsend');
 
 Route::view('/home', 'home')->middleware('verified');
 Route::view('/admin', 'admin');
+
+
 Route::resource('articles', 'ArticleController');
 

@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog With Laravel</title>
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css">
+
 </head>
 <body>
-    @extends('layouts.auth')
+    @extends('layouts.header')
 
     @section('content')
     <div class='container'>
