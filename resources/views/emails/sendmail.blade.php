@@ -7,8 +7,11 @@
     <title>Update Status</title>
 </head>
 <body>
-        <h1>{{$details['title'] }}</h1>
-        <p> {{$details['body']}}</p>
+    <h2>Welcome to the site {{$user['name']}}</h2>
+    <br/>
+    <p>Your registered email-id is {{$user['email']}} , Please click on the below link to verify your email account
+        <br/>
+        <a href="{{url('user/verify', $user->verifyUser->token)}}">Verify Email</a>
         <p>Thank You</p>
 </body>
 </html>
