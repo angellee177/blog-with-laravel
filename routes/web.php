@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 Auth::routes(['verify' => true]); 
 
+
+
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
 
