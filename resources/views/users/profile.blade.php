@@ -6,9 +6,9 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                @if (Route::has('login') && Auth::user() === Auth::guard('admin'))
+                @if (Route::has('login') && Auth::guard('admin'))
                     <h2>Admin</h2>
-                @elseif(Route::has('login') && Auth::user() !== Auth::guard('admin'))
+                @elseif(Route::has('login') && Auth::user())
                     <h2>{{Auth::user()->name}}</h2>
                 @endif
             </div>

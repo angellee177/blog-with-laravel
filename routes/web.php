@@ -17,9 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 Auth::routes(['verify' => true]);
-// Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-// Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-// Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 
 
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
@@ -30,7 +27,7 @@ Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
 Route::get('send-mail', 'MailSend@mailsend');
-Route::resource('users', 'UserController');
+Route::resource('users', 'UserController')->middleware('Admin');
 Route::get('/articles-list', 'UserController@articles')->name('users.articles');
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 

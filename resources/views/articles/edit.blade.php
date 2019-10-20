@@ -40,7 +40,7 @@
                     <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ $article->description }}</textarea>
                 </div>
             </div>
-        @elseif(Route::has('login') && Auth::user() === Auth::guard('admin'))
+        @elseif(Route::has('login') && Auth::guard('admin'))
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">

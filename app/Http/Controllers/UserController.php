@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\User;
+use App\Admin;
+use Illuminate\Support\Facades\Validator;
 use App\Article;
 
 
 use Auth;
+
 
 
 class UserController extends Controller
@@ -20,20 +23,17 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');  
+        $this->middleware('auth');
+        $this->middleware('auth::admin');
 
     }
 
     public function index()
     {   
-        if(Auth::user() === Auth::guard('admin')){
-            $users  =User::latest()->paginate(5);
+            $users  = User::latest()->paginate(5);
             return view('users.index', compact('users'))
                 ->with('i', (request()->input('page', 1)- 1) * 5);
-        } else {
-            return redirect()->route('users.articles')
-                                ->with('danger', "You cannot access it");
-        }
+
     }
 
     public function articles(Request $request)
@@ -47,7 +47,7 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::user() || Auth::guard('admin');
         return view('users.profile', compact('user'));
     }
     /**

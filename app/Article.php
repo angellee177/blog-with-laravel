@@ -23,11 +23,6 @@ class article extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getArticleUser()
-    {
-        return Auth::user()->id;
-    }
-
     public static function getStatus(){
         $type = DB::select(DB::raw('SHOW COLUMNS FROM pages WHERE Field = "status"'))[0]->Type;
         preg_match('/^enum\((.*)\)$/', $type, $matches);
@@ -39,4 +34,4 @@ class article extends Model
     }
 }
 
-$user_id = Auth::user()->id;
+// $user_id = Auth::user()->id;

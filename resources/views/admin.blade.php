@@ -3,9 +3,9 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1>Admin Feature</h1>
+    <h1>Dashboard</h1>
 @stop
 
 @section('content')
-    Hi Admin
+    <p>You are logged in!</p>
 @stop
