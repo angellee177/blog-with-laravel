@@ -6,7 +6,10 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\User;
 use App\Article;
+
+
 use Auth;
+
 
 class UserController extends Controller
 {
@@ -22,10 +25,15 @@ class UserController extends Controller
     }
 
     public function index()
-    {
-        $users  =User::latest()->paginate(5);
-        return view('users.index', compact('users'))
-            ->with('i', (request()->input('page', 1)- 1) * 5);
+    {   
+        if(Auth::user() === Auth::guard('admin')){
+            $users  =User::latest()->paginate(5);
+            return view('users.index', compact('users'))
+                ->with('i', (request()->input('page', 1)- 1) * 5);
+        } else {
+            return redirect()->route('users.articles')
+                                ->with('danger', "You cannot access it");
+        }
     }
 
     public function articles(Request $request)
@@ -35,6 +43,12 @@ class UserController extends Controller
         $articles = Article::where('user_id', $user->id)->paginate(5);;
         return view('users.articles', compact('articles'))
             ->with('i', (request()->input('page', 1)- 1) * 5);
+    }
+
+    public function profile(Request $request)
+    {
+        $user = Auth::user()->get;
+        return view('users.profile', compact('user'));
     }
     /**
      * Show the form for creating a new resource.
@@ -48,8 +62,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
-    {
-        return view('users.show', compact('user'));
+    {   
+            return view('users.show', compact('user'));
+        
+        
     }
 
     /**
