@@ -1,4 +1,4 @@
-@extends('users.layout')
+@extends('home')
  
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Blog with Laravel</h2>
             </div>
             <div class="pull-right">
-                @if (Route::has('login'))
+                @if (Route::has('login') && Auth::user()->id === $article->user_id || Auth::guard('admin'))
                     <div class="top-right links">
                         @auth
                         <a class="btn btn-success" href="{{ route('articles.create') }}"> Create New Article</a>

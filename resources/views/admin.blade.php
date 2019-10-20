@@ -7,5 +7,5 @@
 @stop
 
 @section('content')
-    
+    Hi Admin
 @stop

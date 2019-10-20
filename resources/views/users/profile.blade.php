@@ -1,5 +1,5 @@
 
-    @extends('users.layout')
+    @extends('home')
 
 
 @section('content')

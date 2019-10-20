@@ -58,9 +58,8 @@
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form> --}}
                         <ul class="navbar-nav mr-auto">
-                            @if (Route::has('login'))
                                 <div class="top-right links">
-                                    @auth
+                                    @if(Route::has('login') && Auth::user()|| Auth::guard('admin'))
                                         <div>
                                             <li class="nav-link" style="float:right">
                                                 <a class="nav-link"href="{{ url('/home') }}">Home</a>
@@ -77,9 +76,8 @@
                                                     </li>
                                                 @endif
                                         </div>
-                                    @endauth
+                                    @endif
                                 </div>
-                            @endif
                         </ul>
                     </div>
             </nav>

@@ -38,4 +38,6 @@ Route::get('/profile', 'UserController@profile')->name('users.profile');
 Route::resource('articles', 'ArticleController');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::view('/admin', 'admin')->name('admin');
+
+// Admin Route
+Route::view('/admin', 'admin');
