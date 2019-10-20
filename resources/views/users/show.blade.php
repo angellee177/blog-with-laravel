@@ -10,7 +10,7 @@
             <hr/>
                     {{ $user->email}}
             <hr/>
-                    {{-- {{ $user->->title}} --}}
+                <p>Join Since:{{ $user->created_at}}</p>
             <hr/>
         </div>
         <div class="recipe-actions">

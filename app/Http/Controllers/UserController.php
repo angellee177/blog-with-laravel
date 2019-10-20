@@ -47,7 +47,7 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {
-        $user = Auth::user()->get;
+        $user = Auth::user();
         return view('users.profile', compact('user'));
     }
     /**

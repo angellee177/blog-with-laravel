@@ -137,16 +137,19 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'articles',
+            'url'         => 'articles',
+            'icon'        => 'far fa-newspaper',
+        ],
+        [
+            'text'        => 'My Article',
+            'url'         => 'articles-list',
+            'icon'        => 'far fa-newspaper',
         ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => '/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

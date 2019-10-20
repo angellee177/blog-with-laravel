@@ -32,9 +32,10 @@ Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 Route::get('send-mail', 'MailSend@mailsend');
 Route::resource('users', 'UserController');
 Route::get('/articles-list', 'UserController@articles')->name('users.articles');
+Route::get('/profile', 'UserController@profile')->name('users.profile');
 
 
 Route::resource('articles', 'ArticleController');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::view('/admin', 'admin');
+Route::view('/admin', 'admin')->name('admin');
