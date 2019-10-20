@@ -1,4 +1,4 @@
-@extends('home')
+@extends('users.layout')
    
 @section('content')
     <div class="row">
@@ -26,7 +26,7 @@
     <form action="{{ route('articles.update',$article->id) }}" method="POST">
         @csrf
         @method('PUT')
-        @if (Route::has('login') && Auth::user()->id || Auth::guard('admin'))
+        @if (Route::has('login') && Auth::user()->id)
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -40,8 +40,20 @@
                     <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ $article->description }}</textarea>
                 </div>
             </div>
-        @endif
-            @if (Route::has('login') && Auth::user() === Auth::guard('admin'))
+        @elseif(Route::has('login') && Auth::user() === Auth::guard('admin'))
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Title:</strong>
+                        <input type="text" name="title" value="{{ $article->title }}" class="form-control" placeholder="Title" disabled="disabled">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Description:</strong>
+                        <textarea class="form-control" style="height:150px" name="description" placeholder="Description" disabled="disabled">{{ $article->description }}</textarea>
+                    </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Status:</strong>

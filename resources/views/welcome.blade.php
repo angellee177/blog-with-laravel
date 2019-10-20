@@ -58,12 +58,6 @@
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form> --}}
                         <ul class="navbar-nav mr-auto">
-                            @if (Route::has('login'))
-                                    @auth
-                                    <li class="nav-link" style="float:right">
-                                        <a class="nav-link" href="{{ url('/home') }}">Home</a>
-                                    </li>
-                            @else
                                     <li class="nav-link" style="float:right">
                                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                                     </li>
@@ -72,9 +66,7 @@
                                                 <a class="nav-link" href="{{ route('register') }}">Register</a>
                                             </li>
                                         @endif
-                                    @endauth
                                 </div>
-                            @endif
                         </ul>
                     </div>
             </nav>
