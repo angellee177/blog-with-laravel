@@ -80,13 +80,7 @@
             </nav>
             <div class="container">
                 <div class="row">
-                    {{-- @foreach ($articles as $article)
-                        <div class="col-md-4" style="border:1px;border-style:ridge;margin-right:10px">
-                            <h2>{{$article->title}}</h2>
-                            <p>{{$article->description}}</p>
-                            <p><a class="btn btn-info btn-lg" href="#" role="button">View details &raquo;</a></p>
-                        </div>
-                    @endforeach --}}
+                    
                 </div>
             </div>
     </body>

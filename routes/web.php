@@ -29,8 +29,6 @@ Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 Route::get('send-mail', 'MailSend@mailsend');
 Route::resource('users', 'UserController');
 
-Route::view('/home', 'admin');
-Route::view('/admin', 'admin');
 
 
 Route::resource('articles', 'ArticleController');
@@ -38,13 +36,13 @@ Route::get('/articles-list', 'UserController@articles')->name('users.articles');
 
 Auth::routes();
 
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
