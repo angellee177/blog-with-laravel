@@ -15,7 +15,7 @@ class article extends Model
     
     protected $table = 'articles';
     protected $fillable = [
-        'title', 'description', 'user_id'
+        'title', 'description', 'status', 'user_id'
     ];
 
     public function user()
@@ -26,6 +26,16 @@ class article extends Model
     public function getArticleUser()
     {
         return Auth::user()->id;
+    }
+
+    public static function getStatus(){
+        $type = DB::select(DB::raw('SHOW COLUMNS FROM pages WHERE Field = "status"'))[0]->Type;
+        preg_match('/^enum\((.*)\)$/', $type, $matches);
+        $values = array();
+        foreach(explode(',', $matches[1]) as $value){
+            $values[] = trim($value, "'");
+        }
+        return $values;
     }
 }
 

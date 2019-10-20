@@ -27,8 +27,9 @@ Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
 Route::get('send-mail', 'MailSend@mailsend');
+Route::resource('users', 'UserController');
 
-Route::view('/home', 'home')->middleware('verified');
+Route::view('/home', 'admin');
 Route::view('/admin', 'admin');
 
 

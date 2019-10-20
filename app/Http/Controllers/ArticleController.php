@@ -91,6 +91,7 @@ class ArticleController extends Controller
         $request->validate([
             'title'=>'required',
             'description'=>'required',
+            'status'=> 'in:Pending, Rejected, Approved'
         ]);
 
         $article->update($request->all());

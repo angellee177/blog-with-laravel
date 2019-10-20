@@ -43,20 +43,16 @@
                             </p>
                             <div class="recipe-actions">
                                     <a class="btn btn-info" href="{{ route('articles.show',$article->id) }}">View details &raquo;</a></p>
-                                    @if (Route::has('login'))
+                                    @if (Route::has('login') && Auth::user()->id === $article->user_id || Auth::user() === Auth::guard('admin'))
                                     <div class="top-right links">
                                         @auth
-                                        {{-- @can('delete', $article) --}}
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
-                                                @can('update', $article)
                                                 <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Edit</a>
-                                                @endcan
                                                 @csrf
                                                 @method('DELETE')
                                   
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
-                                        {{-- @endcan --}}
                                         @else
                                             <a href="{{ route('login') }}">Login</a>
                             

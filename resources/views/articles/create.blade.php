@@ -46,6 +46,7 @@
                             </div>
                         </div>
                     <div class="col-md-4 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary">Submit</button>
                             <a class="btn btn-primary" href="{{ route('articles.index') }}">Cancel</a>
                     </div>
                 </div>

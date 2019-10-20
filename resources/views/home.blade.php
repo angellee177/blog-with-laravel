@@ -1,5 +1,11 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'AdminLTE')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
 @section('content')
-    @extends('articles.index')
-@endsection
+    <p>You are logged in!</p>
+@stop
