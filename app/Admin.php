@@ -24,7 +24,5 @@
          *
          * @var array
          */
-        protected $casts = [
-            'email_verified_at' => 'datetime',
-        ];
+
     }
