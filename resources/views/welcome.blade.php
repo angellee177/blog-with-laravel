@@ -58,15 +58,28 @@
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form> --}}
                         <ul class="navbar-nav mr-auto">
-                                    <li class="nav-link" style="float:right">
-                                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                                    </li>
-                                        @if (Route::has('register'))
-                                            <li class="nav-link" style="float:rightt">
-                                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            @if (Route::has('login'))
+                                <div class="top-right links">
+                                    @auth
+                                        <div>
+                                            <li class="nav-link" style="float:right">
+                                                <a class="nav-link"href="{{ url('/home') }}">Home</a>
                                             </li>
-                                        @endif
+                                        </div>
+                                    @else
+                                        <div>
+                                            <li class="nav-link" style="float:right">
+                                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                            </li>
+                                                @if (Route::has('register'))
+                                                    <li class="nav-link" style="float:rightt">
+                                                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                                    </li>
+                                                @endif
+                                        </div>
+                                    @endauth
                                 </div>
+                            @endif
                         </ul>
                     </div>
             </nav>
