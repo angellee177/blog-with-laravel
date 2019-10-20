@@ -50,7 +50,6 @@ class ArticleController extends Controller
         $article->description = $request->description;
         $article->user_id = Auth::id();
         $article->save();
-        Auth::user()->article_id->save();
         return redirect()->route('articles.index')
                         ->with('success', 'articles created successfully');
         

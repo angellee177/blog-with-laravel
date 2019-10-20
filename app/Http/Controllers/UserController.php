@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\User;
+use App\Article;
 use Auth;
 
 class UserController extends Controller
@@ -27,6 +28,14 @@ class UserController extends Controller
             ->with('i', (request()->input('page', 1)- 1) * 5);
     }
 
+    public function articles(Request $request)
+    {
+        $user = Auth::user();
+
+        $articles = Article::where('user_id', $user->id)->paginate(5);;
+        return view('users.articles', compact('articles'))
+            ->with('i', (request()->input('page', 1)- 1) * 5);
+    }
     /**
      * Show the form for creating a new resource.
      *

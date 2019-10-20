@@ -34,7 +34,7 @@ Route::view('/admin', 'admin');
 
 
 Route::resource('articles', 'ArticleController');
-
+Route::get('/articles-list', 'UserController@articles')->name('users.articles');
 
 Auth::routes();
 
@@ -46,6 +46,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
