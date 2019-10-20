@@ -88,13 +88,10 @@ class ArticleController extends Controller
     public function update(Request $request,Article $article)
     {
 
-        $request->validate([
-            'title'=>'required',
-            'description'=>'required',
-            'status'=> 'in:Pending, Rejected, Approved'
-        ]);
-
-        $article->update($request->all());
+        $article->title = $request->title;
+        $article->description = $request->description;
+        $article->status = $request->status;
+        $article->update();
 
         return redirect()->route('articles.index')
                         ->with('success', 'Articles updated successfully');
