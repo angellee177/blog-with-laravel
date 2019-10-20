@@ -41,11 +41,17 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                        <li class="nav-item dropdown">
+                            @if (Route::has('login') && Auth::user() === Auth::guard('admin'))
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Hi, There
+                                Admin
                                 <span class="caret"></span>
                             </a>
-
+                            @elseif(Route::has('login') && Auth::user() !== Auth::guard('admin'))
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Hello
+                                    <span class="caret"></span>
+                            </a>
+                            @endif
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
