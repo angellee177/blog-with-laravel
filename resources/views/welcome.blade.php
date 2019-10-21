@@ -59,7 +59,7 @@
                         </form> --}}
                         <ul class="navbar-nav mr-auto">
                                 <div class="top-right links">
-                                    @if(Route::has('login') && Auth::user() || Auth::guard('admin'))
+                                    @auth
                                         <div>
                                             <li class="nav-link" style="float:right">
                                                 <a class="nav-link"href="{{ url('/home') }}">Home</a>
@@ -74,7 +74,7 @@
                                                         <a class="nav-link" href="{{ route('register') }}">Register</a>
                                                     </li>
                                         </div>
-                                    @endif
+                                    @endauth
                                 </div>
                         </ul>
                     </div>

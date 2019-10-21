@@ -35,7 +35,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                             <ul class="navbar-nav mr-auto">
-                                    @if(Route::has('login') && Auth::user() || Auth::guard('admin'))
+                                    @if(Route::has('login') )
                                     <li class="nav-item active">
                                         <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                                     </li>
@@ -64,17 +64,10 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                        <li class="nav-item dropdown">
-                            @if (Route::has('login') &&  Auth::guard('admin'))
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Admin
+                                Hi
                                 <span class="caret"></span>
                             </a>
-                            @elseif(Route::has('login') && Auth::user()))
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{Auth::user()->name}}
-                                    <span class="caret"></span>
-                            </a>
-                            @endif
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

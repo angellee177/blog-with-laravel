@@ -1,5 +1,5 @@
 
-    @extends('welcome')
+    @extends('home')
 
 
 @section('content')
@@ -37,7 +37,7 @@
                                     <p>Join Since:{{ $user->created_at}}</p>
                             <hr/>
                     </div>
-                    @if (Route::has('login') && Auth::user()->id === $user->id|| Auth::guard('admin'))
+                    @if (Route::has('login'))
                     <div class="top-right links">
                         @auth
                         <form action="{{ route('users.destroy',$user->id) }}" method="POST">

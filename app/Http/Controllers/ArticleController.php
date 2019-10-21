@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Article;
-use App\User;
-use App\Admin;
 use Illuminate\Support\Facades\Validator;
+
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -18,12 +18,13 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
-        $this->middleware('guest:admin');
+        
     }
 
     public function index()
     {
+        $this->middleware('auth');
+           
         $articles  =Article::latest()->paginate(5);
         return view('articles.index', compact('articles'))
             ->with('i', (request()->input('page', 1)- 1) * 5);
@@ -50,7 +51,7 @@ class ArticleController extends Controller
         $article = new Article();
         $article->title = $request->title;
         $article->description = $request->description;
-        $article->user_id = User::id();
+        $article->user_id = Auth::id();
         $article->save();
         return redirect()->route('articles.index')
                         ->with('success', 'articles created successfully');

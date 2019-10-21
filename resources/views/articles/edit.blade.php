@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layouts.auth')
    
 @section('content')
     <div class="row">
@@ -26,7 +26,7 @@
     <form action="{{ route('articles.update',$article->id) }}" method="POST">
         @csrf
         @method('PUT')
-        @if (Route::has('login') && Auth::id() === $article->user_id)
+        @if (Route::has('login'))
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -40,7 +40,7 @@
                     <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ $article->description }}</textarea>
                 </div>
             </div>
-        @elseif(Route::has('login') && Auth::guard('admin'))
+        @elseif(Route::has('login'))
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">

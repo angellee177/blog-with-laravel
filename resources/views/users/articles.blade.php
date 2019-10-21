@@ -43,7 +43,7 @@
                             </p>
                             <div class="recipe-actions">
                                     <a class="btn btn-info" href="{{ route('articles.show',$article->id) }}">View details &raquo;</a></p>
-                                    @if (Route::has('login') && Auth::user()->id === $article->user_id || Auth::guard('admin'))
+                                    @if (Route::has('login') )
                                     <div class="top-right links">
                                         @auth
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">

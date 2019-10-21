@@ -27,15 +27,21 @@ Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
 Route::get('send-mail', 'MailSend@mailsend');
-Route::resource('users', 'UserController')->middleware('Admin');
 Route::get('/articles-list', 'UserController@articles')->name('users.articles');
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 
 
-
+Route::resource('users', 'UserController');
 Route::resource('articles', 'ArticleController');
 
 Route::get('/home', 'HomeController@index')->middleware('auth');
+
+Route::get('/logout', function(){
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');
 
 // Admin Route
 Route::view('/admin', 'admin');

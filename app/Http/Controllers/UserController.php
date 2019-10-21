@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\User;
-use App\Admin;
+
 use Illuminate\Support\Facades\Validator;
 use App\Article;
-
+use App\User;
+use App\Admin;
 
 use Auth;
 
@@ -23,21 +23,16 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
-        $this->middleware('guest:admin');
-
+        
     }
 
     public function index()
     {   
-        if(Auth::guard('admin')){
-            $users  = User::latest()->paginate(5);
+            $this->middleware('auth');
+            $users  =User::latest()->paginate(5);
             return view('users.index', compact('users'))
                 ->with('i', (request()->input('page', 1)- 1) * 5);
-        }elseif(Auth::user()) {
-            return redirect()->route('articles.index')
-                        ->with('danger', 'You don\'t have authorization');
-        }
+
             
 
     }
@@ -53,13 +48,9 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {   
-        if(Auth::user()){
             $user = Auth::user();
             return view('users.profile', compact('user'));
-        }else {
-            return redirect()->route('articles.index')
-                        ->with('danger', 'You don\'t have authorization');
-        }
+       
             
         
     }

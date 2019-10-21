@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layouts.auth')
   
 @section('content')
 <div class="row">

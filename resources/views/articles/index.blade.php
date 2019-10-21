@@ -7,17 +7,13 @@
                 <h2>Blog with Laravel</h2>
             </div>
             <div class="pull-right">
-                @if (Route::has('login') || Auth::guard('admin'))
+                @if (Route::has('login'))
                     <div class="top-right links">
-                        @auth
+                        @if(Auth::user())
                         <a class="btn btn-success" href="{{ route('articles.create') }}"> Create New Article</a>
-                        @else
-                            <a href="{{ route('login') }}">Login</a>
-            
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}">Register</a>
-                            @endif
-                        @endauth
+                        @elseif(Auth::guard('admin'))
+                            <h2>Hi, Admin</h2>
+                        @endif
                     </div>
                 @endif
             </div>
@@ -43,9 +39,8 @@
                             </p>
                             <div class="recipe-actions">
                                     <a class="btn btn-info" href="{{ route('articles.show',$article->id) }}">View details &raquo;</a></p>
-                                    @if (Route::has('login') && Auth::id() === $article->user_id || Auth::guard('admin'))
+                                    @if (Route::has('login'))
                                     <div class="top-right links">
-                                        @if(Route::has('login') && Auth::id() === $article->user_id || Auth::guard('admin'))
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
                                                 <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Edit</a>
                                                 @csrf
@@ -53,13 +48,9 @@
                                   
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
-                                        @else
+                                    @else
                                             <a href="{{ route('login') }}">Login</a>
-                            
-                                            @if (Route::has('register'))
-                                                <a href="{{ route('register') }}">Register</a>
-                                            @endif
-                                        @endif
+                                             <a href="{{ route('register') }}">Register</a>
                                     </div>
                                     @endif
                             </div>
