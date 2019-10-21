@@ -32,13 +32,16 @@
                         <div class="col-md-8 well">
                         <h4 href="{{route('articles.show',$article->id)}}"> {{$article->title}}</h4>
                             <p>
-                                {{$article->description}}
+                                
+                                @if (strlen(strip_tags($article->description)) > 100)
+                                {{ substr(strip_tags($article->description),0, 1000) }}
+                                  ... <a href="{{ route('articles.show',$article->id) }}" class="btn btn-info btn-sm">Read More</a>
+                                @endif
                             </p>
                             <p>
                             <span class="quiet"><small>Created {{ $article->created_at }} ago &nbsp by {{$article->user->name}}</small></span>
                             </p>
                             <div class="recipe-actions">
-                                    <a class="btn btn-info" href="{{ route('articles.show',$article->id) }}">View details &raquo;</a></p>
                                     @if (Route::has('login'))
                                     <div class="top-right links">
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
