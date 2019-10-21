@@ -35,16 +35,9 @@ class UserController extends Controller
 
     public function usersList()
     {
-        $this->middleware('auth');
         $users = DB::table('users')->select('*');
         return datatables() ->   of($users)
-                            ->addIndexColumn()
-                            ->addColumn('action', function($row){
-                                        $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                    
-                                            return $btn;
-                                    })
-                            ->rawColumns(['action'])
+
                             ->  make(true);
 
     }

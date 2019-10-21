@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('home')
    
 @section('content')
     <div class="row">
@@ -22,11 +22,11 @@
             </ul>
         </div>
     @endif
-  
+        
+    @if (Auth::user())
     <form action="{{ route('articles.update',$article->id) }}" method="POST">
         @csrf
         @method('PUT')
-        @if (Route::has('login'))
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -40,34 +40,43 @@
                     <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ $article->description }}</textarea>
                 </div>
             </div>
-        @elseif(Route::has('login'))
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+    </form>
+    @elseif(Auth::guard('admin'))
+    <form action="{{ route('admin.update', $article->id) }}" method="POST">
+        @csrf
+        @method('PUT')
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Title:</strong>
-                        <input type="text" name="title" value="{{ $article->title }}" class="form-control" placeholder="Title" disabled='true'>
+                       {{$article->title}}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Description:</strong>
-                        <textarea class="form-control" style="height:150px" name="description" placeholder="Description" disabled='true'>{{ $article->description }}</textarea>
+                        {{$article->description}}
                     </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Status:</strong>
                         <select class='form-control' name='status'>
-                                <option value="Approved" selected="">Approved</option>
-                                <option value="Rejected" selected="">Rejected</option>
-                                <option value="Pending" selected="">Pending</option>
+                            <option value="Approved" selected="">Approved</option>
+                            <option value="Rejected" selected="">Rejected</option>
+                            <option value="Pending" selected="">Pending</option>
                         </select>
-                    </div>
+                        </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
             @endif
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+            
         </div>
    
     </form>

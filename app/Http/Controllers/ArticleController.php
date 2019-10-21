@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Article;
+use App\Admin;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\newUserPost;
 
 use Auth;
+
+// for Yajra data table
+use Redirect,Response,DB,Config;
+use Datatables;
 
 class ArticleController extends Controller
 {
@@ -30,6 +36,26 @@ class ArticleController extends Controller
             ->with('i', (request()->input('page', 1)- 1) * 5);
     }
 
+    // for admin
+    public function indexAdmin()
+    {
+        return view('articles.indexAdmin');
+    }
+
+    public function articlesAdmin()
+    {
+        $articles = DB::table('articles')->select('*');
+        return datatables() ->   of($articles)
+                            ->addIndexColumn()
+                            ->addColumn('action', function($row){
+                                        $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                    
+                                            return $btn;
+                                    })
+                            ->rawColumns(['action'])
+                            ->  make(true);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,18 +72,30 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Admin $admin)
     {
         $article = new Article();
         $article->title = $request->title;
         $article->description = $request->description;
         $article->user_id = Auth::id();
         $article->save();
+
+
+        Auth::guard('admin')->notify(new Article($article));
         return redirect()->route('articles.index')
                         ->with('success', 'articles created successfully');
         
     }
 
+    public function statusUpdate(Request $request, Article $article)
+    {
+        $article->status = $request->status;
+        $article->update();
+
+        return redirect()
+            ->route('articles.index')
+            ->withMessage('Articles approved successfully');
+    }
     /**
      * Display the specified resource.
      *
@@ -91,10 +129,11 @@ class ArticleController extends Controller
     public function update(Request $request,Article $article)
     {
 
-        $article->title = $request->title;
-        $article->description = $request->description;
-        $article->status = $request->status;
-        $article->update();
+            $article->title = $request->title;
+            $article->description = $request->description;
+            $article->status = $request->status;
+
+        $article->update($request);
 
         return redirect()->route('articles.index')
                         ->with('success', 'Articles updated successfully');

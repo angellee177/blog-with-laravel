@@ -21,7 +21,7 @@
                      <th>Id</th>
                      <th>Name</th>
                      <th>Email</th>
-                     <th>Created at</th>
+                     <th>Verified_at</th>
                   </tr>
                </thead>
             </table>
@@ -29,6 +29,7 @@
    <script>
    $(document).ready( function () {
     $('#laravel_datatable').DataTable({
+            responsive: true,
            processing: true,
            serverSide: true,
            ajax: "{{ url('users-list') }}",
@@ -37,8 +38,7 @@
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
                     { data: 'email_verified_at', name: 'email_verified_at' },
-                    { data: 'created_at', name: 'created_at' },
-                    {data: 'action', name: 'action', orderable: true, searchable: true},
+                    
                  ]
         });
      });

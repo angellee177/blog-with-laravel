@@ -45,6 +45,10 @@ Route::get('/logout', function(){
 
 // Admin Route
 Route::view('/admin', 'admin');
+Route::put('/admin/{article}', 'ArticleController@statusUpdate')->name('admin.update');
+
+
 // Using Yajra data Tables
 Route::get('users-list', 'UserController@usersList'); 
-
+Route::get('article-list', 'ArticleController@articlesAdmin');
+Route::get('article/status', 'ArticleController@indexAdmin');
