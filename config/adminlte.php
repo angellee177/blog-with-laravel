@@ -137,34 +137,26 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'articles',
-            'url'         => 'articles',
-            'icon'        => 'far fa-newspaper',
-        ],
-        [
-            'text'        => 'My Article',
-            'url'         => 'articles-list',
-            'icon'        => 'far fa-newspaper',
+            'text'        => 'pages',
+            'url'         => 'admin/pages',
+            'icon'        => 'far fa-file',
+            'label'       => 4,
+            'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => '/profile',
+            'url'  => 'profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
-            'url'  => 'password/reset',
+            'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text' => 'User List',
-            'url'  => 'users',
-            'icon' => 'fas fa-fw fa-users',
-        ],
-        [
-            'text'    => 'User list',
-            'icon'    => 'fas fa-fw fa-users',
+            'text'    => 'multilevel',
+            'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
                     'text' => 'level_one',
@@ -200,18 +192,17 @@ return [
                 ],
             ],
         ],
-        ['header' => 'labels'],
+        ['header' => 'Article'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
+            'text' => 'Article list',
+            'url'  => 'articles',
+            'icon' => 'fas fa-fw fa-newspaper',
         ],
+        ['header' => 'User'],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'aqua',
+            'text' => 'User list',
+            'url'  => 'users',
+            'icon' => 'fas fa-fw fa-users',
         ],
     ],
 

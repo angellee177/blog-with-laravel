@@ -45,4 +45,6 @@ Route::get('/logout', function(){
 
 // Admin Route
 Route::view('/admin', 'admin');
+// Using Yajra data Tables
+Route::get('users-list', 'UserController@usersList'); 
 
