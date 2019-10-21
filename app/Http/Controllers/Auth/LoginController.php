@@ -7,8 +7,10 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
 
+
 class LoginController extends Controller
 {
+    
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -34,13 +36,14 @@ class LoginController extends Controller
      *
      * @return void
      */
+   
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('guest:admin')->except('logout');
+            $this->middleware('guest')->except('logout');
+            $this->middleware('guest:admin')->except('logout');
     }
-    
-    public function showAdminLoginForm()
+
+     public function showAdminLoginForm()
     {
         return view('auth.login', ['url' => 'admin']);
     }
@@ -54,7 +57,7 @@ class LoginController extends Controller
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect('/admin');
+            return redirect()->intended('/admin');
         }
         return back()->withInput($request->only('email', 'remember'));
     }

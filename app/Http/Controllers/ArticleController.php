@@ -20,7 +20,6 @@ class ArticleController extends Controller
     {
         $this->middleware('guest');
         $this->middleware('guest:admin');
-
     }
 
     public function index()
@@ -77,6 +76,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        // $article ->get()->find($article->id);
         return view('articles.edit', compact('article'));
     }
 
@@ -98,7 +98,7 @@ class ArticleController extends Controller
         return redirect()->route('articles.index')
                         ->with('success', 'Articles updated successfully');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

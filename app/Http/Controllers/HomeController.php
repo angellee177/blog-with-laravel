@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Admin;
-use Illuminate\Support\Facades\Validator;
+
 class HomeController extends Controller
 {
     /**
@@ -15,8 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
-        $this->middleware('guest:admin');
+        $this->middleware('auth');
     }
 
     /**

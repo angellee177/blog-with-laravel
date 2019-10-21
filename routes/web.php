@@ -32,9 +32,11 @@ Route::get('/articles-list', 'UserController@articles')->name('users.articles');
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 
 
+
 Route::resource('articles', 'ArticleController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->middleware('auth');
 
 // Admin Route
 Route::view('/admin', 'admin');
+

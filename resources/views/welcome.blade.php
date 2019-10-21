@@ -33,7 +33,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/articles">Articles <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
@@ -59,7 +59,7 @@
                         </form> --}}
                         <ul class="navbar-nav mr-auto">
                                 <div class="top-right links">
-                                    @if(Route::has('login') && Auth::user()|| Auth::guard('admin'))
+                                    @if(Route::has('login') && Auth::user() || Auth::guard('admin'))
                                         <div>
                                             <li class="nav-link" style="float:right">
                                                 <a class="nav-link"href="{{ url('/home') }}">Home</a>
@@ -70,11 +70,9 @@
                                             <li class="nav-link" style="float:right">
                                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
                                             </li>
-                                                @if (Route::has('register'))
                                                     <li class="nav-link" style="float:rightt">
                                                         <a class="nav-link" href="{{ route('register') }}">Register</a>
                                                     </li>
-                                                @endif
                                         </div>
                                     @endif
                                 </div>

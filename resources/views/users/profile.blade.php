@@ -1,16 +1,12 @@
 
-    @extends('home')
+    @extends('welcome')
 
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                @if (Route::has('login') && Auth::guard('admin'))
-                    <h2>Admin</h2>
-                @elseif(Route::has('login') && Auth::user())
-                    <h2>{{Auth::user()->name}}</h2>
-                @endif
+               <h2>User Profile</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>

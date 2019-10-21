@@ -1,11 +1,17 @@
-@extends('adminlte::page')
-
-@section('title', 'AdminLTE')
-
-@section('content_header')
-    <h1>Dashboard</h1>
-@stop
+@extends('layouts.auth')
 
 @section('content')
-    <p>You are logged in!</p>
-@stop
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
+
+                <div class="card-body">
+                    Hi boss!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

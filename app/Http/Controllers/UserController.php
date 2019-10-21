@@ -23,32 +23,45 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('auth::admin');
+        $this->middleware('guest');
+        $this->middleware('guest:admin');
 
     }
 
     public function index()
     {   
+        if(Auth::guard('admin')){
             $users  = User::latest()->paginate(5);
             return view('users.index', compact('users'))
                 ->with('i', (request()->input('page', 1)- 1) * 5);
+        }elseif(Auth::user()) {
+            return redirect()->route('articles.index')
+                        ->with('danger', 'You don\'t have authorization');
+        }
+            
 
     }
 
     public function articles(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::id();
 
-        $articles = Article::where('user_id', $user->id)->paginate(5);;
+        $articles = Article::where('user_id', $user)->paginate(5);;
         return view('users.articles', compact('articles'))
             ->with('i', (request()->input('page', 1)- 1) * 5);
     }
 
     public function profile(Request $request)
-    {
-        $user = Auth::user() || Auth::guard('admin');
-        return view('users.profile', compact('user'));
+    {   
+        if(Auth::user()){
+            $user = Auth::user();
+            return view('users.profile', compact('user'));
+        }else {
+            return redirect()->route('articles.index')
+                        ->with('danger', 'You don\'t have authorization');
+        }
+            
+        
     }
     /**
      * Show the form for creating a new resource.

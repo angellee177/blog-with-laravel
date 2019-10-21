@@ -21,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function article()
     {
-        return $this->hasMany(Article::class, 'article_id', 'id');
+        return $this->hasMany(Article::class);
     }
     /**
      * The attributes that should be hidden for arrays.

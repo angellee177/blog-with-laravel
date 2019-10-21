@@ -7,7 +7,7 @@
                 <h2>Blog with Laravel</h2>
             </div>
             <div class="pull-right">
-                @if (Route::has('login') && Auth::user()->id === $article->user_id || Auth::guard('admin'))
+                @if (Route::has('login') || Auth::guard('admin'))
                     <div class="top-right links">
                         @auth
                         <a class="btn btn-success" href="{{ route('articles.create') }}"> Create New Article</a>
@@ -43,9 +43,9 @@
                             </p>
                             <div class="recipe-actions">
                                     <a class="btn btn-info" href="{{ route('articles.show',$article->id) }}">View details &raquo;</a></p>
-                                    @if (Route::has('login') && Auth::user()->id === $article->user_id || Auth::guard('admin'))
+                                    @if (Route::has('login') && Auth::id() === $article->user_id || Auth::guard('admin'))
                                     <div class="top-right links">
-                                        @auth
+                                        @if(Route::has('login') && Auth::id() === $article->user_id || Auth::guard('admin'))
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
                                                 <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Edit</a>
                                                 @csrf
@@ -59,7 +59,7 @@
                                             @if (Route::has('register'))
                                                 <a href="{{ route('register') }}">Register</a>
                                             @endif
-                                        @endauth
+                                        @endif
                                     </div>
                                     @endif
                             </div>
