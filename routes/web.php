@@ -23,7 +23,7 @@ Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
 
 
-Route::post('/login/admin', 'Auth\LoginController@adminLogin');
+Route::post('/login/admin', 'Auth\LoginController@adminLogin')->name('login.admin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
 Route::get('send-mail', 'MailSend@mailsend');

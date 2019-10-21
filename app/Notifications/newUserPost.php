@@ -44,8 +44,12 @@ class newUserPost extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('A new Post need to Approved' . $this->article->title)
-                    ->action('Approve article', route('articles.edit', $this->article->id))
+                    ->greeting('Hello, Admin!')
+                    ->subject('New Article Approval Needed')
+                    ->line('A new Post need to Approved')
+                    ->line('Article Title', $this->article->title)
+                    ->line('Artcicle Status', $this->article->status)
+                    ->action('login', route('login.admin'))
                     ->line('Thank you for using our application!');
     }
 

@@ -43,7 +43,9 @@ class SendAdminUnreadArticle extends Command
         $admin = Admin::all();
 
         $admin->map(function($admin){
-            $messages = GetThreadMessages::new()
-        })
+            $articles = GetThreadArticles::new($admin);
+
+            $admin->notify (new UnreadArticlesInThread($articles, $admin));
+        });
     }
 }

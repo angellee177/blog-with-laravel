@@ -8,6 +8,7 @@ use App\Article;
 use App\Admin;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\newUserPost;
+use Illuminate\Support\Facades\Notification;
 
 use Auth;
 
@@ -80,8 +81,11 @@ class ArticleController extends Controller
         $article->user_id = Auth::id();
         $article->save();
 
-
-        Auth::guard('admin')->notify(new Article($article));
+        $admin = Auth::guest('admin');
+        Notification::route('mail', 'leexiao62@gmail.com')
+            ->route('nexmo', '5555555555')
+            ->notify(new NewUserPost($article));
+        // Notification::send($admin, new NewUserPost($article));
         return redirect()->route('articles.index')
                         ->with('success', 'articles created successfully');
         
@@ -133,7 +137,7 @@ class ArticleController extends Controller
             $article->description = $request->description;
             $article->status = $request->status;
 
-        $article->update($request);
+        $article->update();
 
         return redirect()->route('articles.index')
                         ->with('success', 'Articles updated successfully');

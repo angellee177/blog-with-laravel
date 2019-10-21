@@ -44,7 +44,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
             </div>
     </form>
-    @elseif(Auth::guard('admin'))
+    @elseif(Auth::guest('admin'))
     <form action="{{ route('admin.update', $article->id) }}" method="POST">
         @csrf
         @method('PUT')
