@@ -30,11 +30,16 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $this->middleware('auth');
            
         $articles  =Article::latest()->paginate(5);
         return view('articles.index', compact('articles'))
             ->with('i', (request()->input('page', 1)- 1) * 5);
+    }
+
+    public function indexApproved()
+    {
+                $articles  =Article::all();
+                return view('articles.approved', compact('articles'));
     }
 
     // for admin

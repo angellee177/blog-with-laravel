@@ -9,15 +9,11 @@
             <div class="pull-right">
                 @if (Route::has('login'))
                     <div class="top-right links">
-                        @auth
+                        @if(Auth::user())
                         <a class="btn btn-success" href="{{ route('articles.create') }}"> Create New Article</a>
-                        @else
-                            <a href="{{ route('login') }}">Login</a>
-            
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}">Register</a>
-                            @endif
-                        @endauth
+                        @elseif(Auth::guard('admin'))
+                            <h2>Hi, Admin</h2>
+                        @endif
                     </div>
                 @endif
             </div>
@@ -33,19 +29,22 @@
             <div class="row">
                 @foreach ($articles as $article)
                 <div class="row">
+                    @if($article->status === 'Approved')
                         <div class="col-md-8 well">
                         <h4 href="{{route('articles.show',$article->id)}}"> {{$article->title}}</h4>
                             <p>
-                                {{$article->description}}
+                                
+                                @if (strlen(strip_tags($article->description)) > 100)
+                                {{ substr(strip_tags($article->description),0, 1000) }}
+                                  ... <a href="{{ route('articles.show',$article->id) }}" class="btn btn-info btn-sm">Read More</a>
+                                @endif
                             </p>
                             <p>
                             <span class="quiet"><small>Created {{ $article->created_at }} ago &nbsp by {{$article->user->name}}</small></span>
                             </p>
                             <div class="recipe-actions">
-                                    <a class="btn btn-info" href="{{ route('articles.show',$article->id) }}">View details &raquo;</a></p>
-                                    @if (Route::has('login') )
+                                    @if (Route::has('login') && Auth::id() === $article->user_id)
                                     <div class="top-right links">
-                                        @auth
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
                                                 <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Edit</a>
                                                 @csrf
@@ -53,22 +52,19 @@
                                   
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
-                                        @else
+                                    @else
                                             <a href="{{ route('login') }}">Login</a>
-                            
-                                            @if (Route::has('register'))
-                                                <a href="{{ route('register') }}">Register</a>
-                                            @endif
-                                        @endauth
+                                             <a href="{{ route('register') }}">Register</a>
                                     </div>
                                     @endif
                             </div>
                         </div>
-                    </div>
+                    @endif
+                </div>
                 @endforeach
             </div>
     </div>
   
-    {{$articles->links()}}
+
       
 @endsection

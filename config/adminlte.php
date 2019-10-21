@@ -132,16 +132,19 @@ return [
         ],
         ['header' => 'main_navigation'],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'article list',
+            'url'  => 'articles',
+            'icon'  => 'fas fa-fw fa-newspaper',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text' => 'My Article',
+            'url'  => 'my-article',
+            'icon'  => 'fas fa-fw fa-twitch',
+        ],
+        [
+            'text' => 'Homepage',
+            'url'  => 'homepage',
+            'icon'  => 'fas fa-fw fa-home',
         ],
         ['header' => 'account_settings'],
         [
@@ -154,55 +157,15 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'Article'],
-        [
-            'text' => 'Article list',
-            'url'  => 'articles',
-            'icon' => 'fas fa-fw fa-newspaper',
-        ],
         ['header' => 'User'],
         [
-            'text' => 'User list',
-            'url'  => 'users',
+            'text' => 'User Table',
+            'url'  => 'users-table',
             'icon' => 'fas fa-fw fa-users',
+        ],[
+            'text' => 'User List',
+            'url'  => 'users',
+            'icon' => 'fas fa-fw fa-object-group',
         ],
     ],
 

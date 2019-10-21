@@ -42,7 +42,7 @@
                             <span class="quiet"><small>Created {{ $article->created_at }} ago &nbsp by {{$article->user->name}}</small></span>
                             </p>
                             <div class="recipe-actions">
-                                    @if (Route::has('login'))
+                                    @if (Route::has('login') && Auth::id() === $article->user_id)
                                     <div class="top-right links">
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
                                                 <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Edit</a>

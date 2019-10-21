@@ -27,7 +27,7 @@ Route::post('/login/admin', 'Auth\LoginController@adminLogin')->name('login.admi
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
 Route::get('send-mail', 'MailSend@mailsend');
-Route::get('/articles-list', 'UserController@articles')->name('users.articles');
+Route::get('/my-article', 'UserController@articles')->name('users.articles');
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 
 
@@ -50,5 +50,10 @@ Route::put('/admin/{article}', 'ArticleController@statusUpdate')->name('admin.up
 
 // Using Yajra data Tables
 Route::get('users-list', 'UserController@usersList'); 
+Route::get('users-table', 'UserController@yajraIndex'); 
 Route::get('article-list', 'ArticleController@articlesAdmin');
 Route::get('article/status', 'ArticleController@indexAdmin');
+
+
+// get Article with approved status
+Route::get('homepage', 'ArticleController@indexApproved');
