@@ -29,7 +29,7 @@
             <div class="row">
                 @foreach ($articles as $article)
                 <div class="row">
-                    @if($article->status === 'Approved')
+                    @if($article->status === 'Pending')
                         <div class="col-md-8 well">
                         <h4 href="{{route('articles.show',$article->id)}}"> {{$article->title}}</h4>
                             <p>
@@ -40,13 +40,13 @@
                                 @endif
                             </p>
                             <p>
-                                    <b>status: {{$article->status}}</b>
+                            <b>status: {{$article->status}}</b>
                             </p>
                             <p>
                             <span class="quiet"><small>Created {{ $article->created_at }} ago &nbsp by {{$article->user->name}}</small></span>
                             </p>
                             <div class="recipe-actions">
-                                    @if (Route::has('login') && Auth::id() === $article->user_id )
+                                    @if (Route::has('login') && Auth::guest('admin'))
                                     <div class="top-right links">
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
                                                 <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Edit</a>

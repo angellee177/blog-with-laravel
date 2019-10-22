@@ -132,14 +132,30 @@ return [
         ],
         ['header' => 'main_navigation'],
         [
-            'text' => 'article list',
-            'url'  => 'articles',
-            'icon'  => 'fas fa-fw fa-newspaper',
-        ],
-        [
-            'text' => 'My Article',
-            'url'  => 'my-article',
-            'icon'  => 'fas fa-fw fa-twitch',
+            'text'    => 'articles',
+            'icon'    => 'fas fa-fw fa-newspaper',
+            'submenu' => [
+                [
+                    'text' => 'All Article',
+                    'url'  => 'articles',
+                    'icon'  => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'My Article',
+                    'url'  => 'my-article',
+                    'icon'  => 'fas fa-fw fa-twitch',
+                ],
+                [
+                    'text' => 'Rejected Article',
+                    'url'  => 'article-rejected',
+                    'icon'  => 'fas fa-fw fa-ban',
+                ],
+                [
+                    'text' => 'Pending Article',
+                    'url'  => 'article-pending',
+                    'icon'  => 'fas fa-fw fa-clock',
+                ],
+            ],
         ],
         [
             'text' => 'Homepage',

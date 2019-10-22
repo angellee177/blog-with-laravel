@@ -42,6 +42,23 @@ class ArticleController extends Controller
                 return view('articles.approved', compact('articles'));
     }
 
+    public function indexRejected()
+    {
+                $articles  =Article::all();
+                return view('articles.rejected', compact('articles'));
+    }
+
+    public function indexPending()
+    {
+        if(Auth::guest('admin')){
+            $articles  =Article::all();
+                return view('articles.pending', compact('articles'));
+        }else{
+            return redirect()->route('users.profile')
+                ->with('success', 'cannot access this feature');
+        }
+                
+    }
     // for admin
     public function indexAdmin()
     {

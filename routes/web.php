@@ -59,6 +59,7 @@ Route::get('article/status', 'ArticleController@indexAdmin');
 Route::get('homepage', 'ArticleController@indexApproved');
 
 
-// to Block User
-Route::get('userUserRevoke/{id}', array('as'=> 'users.revokeuser', 'uses' => 'UserController@revoke'));
-Route::post('userBan', array('as'=> 'users.ban', 'uses' => 'UserController@ban'));
+// to view article with status
+Route::get('/article-rejected', 'ArticleController@indexRejected');
+Route::get('/article-pending', 'ArticleController@indexPending');
+

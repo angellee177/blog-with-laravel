@@ -39,10 +39,13 @@
                                 @endif
                             </p>
                             <p>
+                                    <b>status: {{$article->status}}</b>
+                            </p>
+                            <p>
                             <span class="quiet"><small>Created {{ $article->created_at }} ago &nbsp by {{$article->user->name}}</small></span>
                             </p>
                             <div class="recipe-actions">
-                                    @if (Route::has('login') && Auth::id() === $article->user_id)
+                                    @if (Route::has('login') && Auth::id() === $article->user_id || Auth::guest('admin'))
                                     <div class="top-right links">
                                         <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
                                                 <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Edit</a>
@@ -52,8 +55,7 @@
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     @else
-                                            <a href="{{ route('login') }}">Login</a>
-                                             <a href="{{ route('register') }}">Register</a>
+                                            
                                     </div>
                                     @endif
                             </div>

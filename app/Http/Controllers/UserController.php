@@ -38,7 +38,13 @@ class UserController extends Controller
 
     public function yajraIndex()
     {   
-            return view('users.users');
+          
+        if(Auth::guest('admin')){
+              return view('users.users');
+        }else{
+            return redirect()->route('users.profile')
+                ->with('success', 'cannot access this feature');
+        }
     }
 
     public function usersList()
@@ -51,19 +57,27 @@ class UserController extends Controller
 
     public function articles(Request $request)
     {
-        $user = Auth::id();
+        if(Auth::guest('admin')){
+            return redirect()->route('users.index')
+                ->with('success', 'cannot access this feature');
+        }else{
+            $user = Auth::id();
 
-        $articles = Article::where('user_id', $user)->paginate(5);;
-        return view('users.articles', compact('articles'))
-            ->with('i', (request()->input('page', 1)- 1) * 5);
+            $articles = Article::where('user_id', $user)->paginate(5);;
+            return view('users.articles', compact('articles'))
+                ->with('i', (request()->input('page', 1)- 1) * 5);
+        }
     }
 
     public function profile(Request $request)
     {   
+        if(Auth::guest('admin')){
+            return redirect()->route('users.index')
+                ->with('success', 'cannot access this feature');
+        }else{
             $user = Auth::user();
             return view('users.profile', compact('user'));
-       
-            
+        }
         
     }
     /**
@@ -124,39 +138,5 @@ class UserController extends Controller
         return redirect()->route('users.index')
                         ->with('success', 'User deleted successfully');
     }
-
-        public function ban(Request $request)
-        {
-            $input = $request->all();
-            if(!empty($input['id'])){
-                $user = User::find($input['id']);
-                $user->bans()->create([
-                    'expired_at' => '+1 month',
-                    'comment'=>$request->baninfo
-                ]);
-            }
-
-
-            return redirect()->route('users.index')->with('success','Ban Successfully..');
-        }
-
-
-        /**
-         * Show the form for creating a new resource.
-         *
-         * @return Response
-         */
-        public function revoke($id)
-        {
-            if(!empty($id)){
-                $user = User::find($id);
-                $user->unban();
-            }
-
-
-            return redirect()->route('users.index')
-                            ->with('success','User Revoke Successfully.');
-        }
-
 
 }
