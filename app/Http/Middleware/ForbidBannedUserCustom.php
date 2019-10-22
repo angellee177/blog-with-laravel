@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Support\Facades\Auth;
+
+class ForbidBannedUserCustom
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    protected $auth;
+
+    public function __construct(Guard $auth)
+    {
+        $this->auth = $auth;
+    }
+
+
+    public function handle($request, Closure $next)
+    {
+        $user = $this->auth->user();
+
+
+        if ($user && $user->isBanned()) {
+            \Session::flush();
+            return redirect('login')->withInput()->withErrors([
+                'email' => 'This account is blocked.',
+            ]);
+        }
+
+
+        return $next($request);
+    }
+}

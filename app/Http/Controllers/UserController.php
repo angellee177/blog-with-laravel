@@ -124,4 +124,39 @@ class UserController extends Controller
         return redirect()->route('users.index')
                         ->with('success', 'User deleted successfully');
     }
+
+        public function ban(Request $request)
+        {
+            $input = $request->all();
+            if(!empty($input['id'])){
+                $user = User::find($input['id']);
+                $user->bans()->create([
+                    'expired_at' => '+1 month',
+                    'comment'=>$request->baninfo
+                ]);
+            }
+
+
+            return redirect()->route('users.index')->with('success','Ban Successfully..');
+        }
+
+
+        /**
+         * Show the form for creating a new resource.
+         *
+         * @return Response
+         */
+        public function revoke($id)
+        {
+            if(!empty($id)){
+                $user = User::find($id);
+                $user->unban();
+            }
+
+
+            return redirect()->route('users.index')
+                            ->with('success','User Revoke Successfully.');
+        }
+
+
 }
