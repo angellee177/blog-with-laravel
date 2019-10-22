@@ -39,6 +39,9 @@
                                 {{$article->description}}
                             </p>
                             <p>
+                                    <b>status: {{$article->status}}</b>
+                            </p>
+                            <p>
                             <span class="quiet"><small>Created {{ $article->created_at }} ago &nbsp by {{$article->user->name}}</small></span>
                             </p>
                             <div class="recipe-actions">

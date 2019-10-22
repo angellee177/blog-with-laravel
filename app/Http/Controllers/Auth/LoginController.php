@@ -61,9 +61,4 @@ class LoginController extends Controller
         }
         return back()->withInput($request->only('email', 'remember'));
     }
-
-    protected function credentials(Request $Request){
-        $credentials = $Request->only($this->username(),'password'); // getting data from login form
-        return array_add($credentials, 'isBan',0); // 0 means all fine and can login
-    }
 }
